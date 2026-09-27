@@ -1,0 +1,410 @@
+/* =========================================================
+   Lynchburg Attractions — Stylesheet
+   Shared by index.html and page2.html
+   Sections: Variables > Reset > Tag styles > Layout (Flexbox)
+             > Classes/IDs > Components > Animations > Responsive
+   ========================================================= */
+
+/* ---------- 1. Design tokens (CSS variables) ---------- */
+:root {
+    --color-navy: #1b263b;
+    --color-navy-light: #2b3a55;
+    --color-teal: #2a9d8f;
+    --color-teal-dark: #21867a;
+    --color-gold: #e9c46a;
+    --color-brick: #e76f51;
+    --color-cream: #faf6ef;
+    --color-white: #ffffff;
+    --color-text: #2f2f2f;
+    --color-text-light: #6b6b6b;
+
+    --font-heading: "Fraunces", Georgia, serif;
+    --font-body: "Inter", "Segoe UI", sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --shadow-sm: 0 2px 10px rgba(27, 38, 59, 0.08);
+    --shadow-md: 0 10px 26px rgba(27, 38, 59, 0.14);
+    --shadow-lg: 0 20px 46px rgba(27, 38, 59, 0.22);
+
+    --transition: 0.3s ease;
+}
+
+/* ---------- 2. Reset & base ---------- */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: var(--color-gold);
+    color: var(--color-navy);
+}
+
+/* Themed scrollbar (WebKit browsers) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-teal);
+    border-radius: 10px;
+}
+
+/* ---------- 3. Tag-based styling ---------- */
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-cream);
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(27, 38, 59, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+    line-height: 1.6;
+    /* Flexbox page shell: pushes footer to the bottom on short pages */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.1rem, 5vw, 3.2rem);
+    font-weight: 700;
+    margin: 0 0 0.6rem;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    color: var(--color-navy);
+    margin-top: 0;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+/* Small decorative underline under every h2, tag-level styling */
+h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 48px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-gold));
+}
+
+h3 {
+    font-family: var(--font-heading);
+    color: var(--color-navy);
+    font-size: 1.2rem;
+}
+
+p {
+    color: var(--color-text-light);
+    max-width: 68ch;
+}
+
+ul,
+ol {
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color: var(--color-teal-dark);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--color-brick);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ---------- 4. Site header / nav (Flexbox) ---------- */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(250, 246, 239, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--color-navy);
+}
+
+.logo span {
+    color: var(--color-brick);
+}
+
+.logo:hover {
+    color: var(--color-navy);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.75rem;
+}
+
+.nav-link {
+    position: relative;
+    font-weight: 600;
+    color: var(--color-navy);
+    padding-bottom: 4px;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--color-brick);
+    transition: width var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--color-navy);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--color-brick);
+}
+
+/* ---------- 5. Hero section ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--color-navy), var(--color-teal-dark));
+    background-image:
+        linear-gradient(135deg, var(--color-navy), var(--color-teal-dark)),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 2px, transparent 2px 14px);
+    color: var(--color-white);
+    text-align: center;
+    padding: 4.5rem 1.5rem;
+}
+
+.hero h1 {
+    color: var(--color-white);
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    animation: fadeInUp 0.7s ease both;
+}
+
+.hero-text {
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 60ch;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    animation: fadeInUp 0.7s ease 0.15s both;
+}
+
+/* ---------- 6. Page container & content sections ---------- */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1rem;
+    flex: 1;
+}
+
+.content-section {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.6s ease both;
+}
+
+.content-section.highlight {
+    background: linear-gradient(120deg, #fff7e6, var(--color-white));
+    border-left: 5px solid var(--color-gold);
+}
+
+/* ---------- 7. Image styling (class + id) ---------- */
+.rounded-img {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    margin: 1.25rem auto 0;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+#city-photo:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ---------- 8. Attractions grid (Flexbox layout) ---------- */
+.attractions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    margin: 1.5rem 0 0;
+}
+
+.attraction-card {
+    flex: 1 1 200px;
+    background: var(--color-cream);
+    border-left: 4px solid var(--color-teal);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.4rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.attraction-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Cycle accent colors across cards for visual rhythm */
+.attraction-card:nth-child(3n+2) {
+    border-left-color: var(--color-gold);
+}
+.attraction-card:nth-child(3n+3) {
+    border-left-color: var(--color-brick);
+}
+
+/* Numbered variant (ordered list on page 2) */
+.attractions-grid.numbered {
+    counter-reset: step;
+}
+
+.attractions-grid.numbered .attraction-card {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    counter-increment: step;
+    border-left: none;
+}
+
+.attractions-grid.numbered .attraction-card::before {
+    content: counter(step);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-teal), var(--color-navy));
+    color: var(--color-white);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+/* ---------- 9. Call-to-action button ---------- */
+.cta {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 2.5rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--color-brick), var(--color-gold));
+    color: var(--color-white) !important;
+    font-weight: 700;
+    padding: 0.85rem 1.9rem;
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-white);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* ---------- 10. Footer (Flexbox) ---------- */
+.site-footer {
+    background: var(--color-navy);
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+}
+
+/* ---------- 11. Animations ---------- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger content sections slightly as they appear */
+.content-section:nth-of-type(2) { animation-delay: 0.05s; }
+.content-section:nth-of-type(3) { animation-delay: 0.1s; }
+.content-section:nth-of-type(4) { animation-delay: 0.15s; }
+
+/* ---------- 12. Responsive tweaks ---------- */
+@media (max-width: 640px) {
+    .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero {
+        padding: 3rem 1.25rem;
+    }
+
+    .content-section {
+        padding: 1.5rem;
+    }
+
+    .attraction-card {
+        flex: 1 1 100%;
+    }
+}
