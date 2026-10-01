@@ -10,9 +10,12 @@
     --color-navy: #1b263b;
     --color-navy-light: #2b3a55;
     --color-teal: #2a9d8f;
-    --color-teal-dark: #21867a;
+    /* Darkened from #21867a so white text on it passes WCAG AA (5.2:1) */
+    --color-teal-dark: #1d7a6f;
     --color-gold: #e9c46a;
     --color-brick: #e76f51;
+    /* Text-safe brick: 5.1:1 on cream (original #e76f51 was only 2.9:1) */
+    --color-brick-dark: #b4432a;
     --color-cream: #faf6ef;
     --color-white: #ffffff;
     --color-text: #2f2f2f;
@@ -30,6 +33,7 @@
     --shadow-lg: 0 20px 46px rgba(27, 38, 59, 0.22);
 
     --transition: 0.3s ease;
+    --focus-ring: 3px solid var(--color-gold);
 }
 
 /* ---------- 2. Reset & base ---------- */
@@ -129,12 +133,39 @@ a {
 }
 
 a:hover {
-    color: var(--color-brick);
+    color: var(--color-brick-dark);
 }
 
 img {
     max-width: 100%;
+    height: auto;
     display: block;
+}
+
+/* Visible keyboard focus on every interactive element */
+a:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Skip link: hidden off-screen until a keyboard user tabs to it */
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    transition: top var(--transition);
+}
+
+.skip-link:focus {
+    top: 1rem;
+    color: var(--color-white);
 }
 
 /* ---------- 4. Site header / nav (Flexbox) ---------- */
@@ -167,7 +198,7 @@ img {
 }
 
 .logo span {
-    color: var(--color-brick);
+    color: var(--color-brick-dark);
 }
 
 .logo:hover {
@@ -177,6 +208,7 @@ img {
 .nav-links {
     display: flex;
     gap: 1.75rem;
+    margin: 0;
 }
 
 .nav-link {
@@ -207,7 +239,7 @@ img {
 }
 
 .nav-link.active {
-    color: var(--color-brick);
+    color: var(--color-brick-dark);
 }
 
 /* ---------- 5. Hero section ---------- */
@@ -228,7 +260,7 @@ img {
 }
 
 .hero-text {
-    color: rgba(255, 255, 255, 0.88);
+    color: var(--color-white);
     max-width: 60ch;
     margin: 0 auto;
     font-size: 1.05rem;
@@ -236,12 +268,16 @@ img {
 }
 
 /* ---------- 6. Page container & content sections ---------- */
+/* main grows to fill the page so the footer stays at the bottom */
+main {
+    flex: 1;
+}
+
 .container {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
     padding: 2.5rem 1.5rem 1rem;
-    flex: 1;
 }
 
 .content-section {
@@ -251,6 +287,10 @@ img {
     padding: 2rem;
     margin-bottom: 2rem;
     animation: fadeInUp 0.6s ease both;
+}
+
+.content-section h3 {
+    margin: 1.5rem 0 0.25rem;
 }
 
 .content-section.highlight {
@@ -343,7 +383,8 @@ img {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: linear-gradient(135deg, var(--color-brick), var(--color-gold));
+    /* Dark brick to deep rust keeps white text above 4.5:1 across the whole gradient */
+    background: linear-gradient(135deg, var(--color-brick-dark), #8a3320);
     color: var(--color-white) !important;
     font-weight: 700;
     padding: 0.85rem 1.9rem;
@@ -372,6 +413,13 @@ img {
     letter-spacing: 0.02em;
 }
 
+/* Override the global grey p color, which was only 2.84:1 on navy */
+.site-footer p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: none;
+    margin: 0;
+}
+
 /* ---------- 11. Animations ---------- */
 @keyframes fadeInUp {
     from {
@@ -390,21 +438,88 @@ img {
 .content-section:nth-of-type(4) { animation-delay: 0.15s; }
 
 /* ---------- 12. Responsive tweaks ---------- */
+/* Tablets and phones (common widths: 375px to 640px) */
 @media (max-width: 640px) {
+    body {
+        font-size: 0.95rem;
+    }
+
     .site-nav {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-links {
+        gap: 1.25rem;
+    }
+
+    /* Larger tap targets for touch screens */
+    .nav-link {
+        display: inline-block;
+        padding: 0.5rem 0.25rem;
     }
 
     .hero {
         padding: 3rem 1.25rem;
     }
 
+    .hero-text {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem 1rem 0.5rem;
+    }
+
     .content-section {
-        padding: 1.5rem;
+        padding: 1.5rem 1.25rem;
+        border-radius: var(--radius-md);
+        margin-bottom: 1.5rem;
+    }
+
+    /* Stack the attraction cards in a single column */
+    .attractions-grid {
+        flex-direction: column;
     }
 
     .attraction-card {
         flex: 1 1 100%;
+    }
+
+    /* Full-width button is easier to tap */
+    .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero {
+        padding: 2.5rem 1rem;
+    }
+
+    .content-section {
+        padding: 1.25rem 1rem;
+    }
+}
+
+/* Respect users who ask the OS to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
     }
 }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>More Lynchburg Attractions</title>
+    <meta name="description" content="More places to explore in Lynchburg, Virginia: historic sites, outdoor trails, and family activities.">
     <!-- Google Fonts for heading/body typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,63 +14,73 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Lets keyboard and screen reader users jump past the navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Site navigation -->
     <header class="site-header">
-        <nav class="site-nav">
-            <a href="index.html" class="logo">Lynchburg<span>.VA</span></a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="page2.html" class="nav-link active">More Attractions</a>
-            </div>
+        <nav class="site-nav" aria-label="Main">
+            <a href="index.html" class="logo" aria-label="Lynchburg.VA home">Lynchburg<span>.VA</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="page2.html" class="nav-link active" aria-current="page">More Attractions</a></li>
+            </ul>
         </nav>
     </header>
 
-    <!-- Main header -->
-    <section class="hero" id="hero">
-        <h1>More Places to Explore in Lynchburg</h1>
-        <!-- Giving context about main topic -->
-        <p class="hero-text">Lynchburg has many attractions for people interested in history, culture, nature, old school lifestyle, and family activities.</p>
-    </section>
+    <main id="main-content">
+        <!-- Main header -->
+        <section class="hero" id="hero">
+            <h1>More Places to Explore in Lynchburg</h1>
+            <!-- Giving context about main topic -->
+            <p class="hero-text">Lynchburg has many attractions for people interested in history, culture, nature, old school lifestyle, and family activities.</p>
+        </section>
 
-    <main class="container">
-        <!-- Attractions list -->
-        <section class="content-section" id="historic">
-            <h2>Historic Attractions</h2>
-            <p>
-                Old City Cemetery was established in 1806 and includes gardens, museums, and historic graves. Point of Honor is another historic location that offers visitors an opportunity to learn about Lynchburg's past.
+        <div class="container">
+            <!-- Historic sites, each with its own sub-heading -->
+            <section class="content-section" id="historic" aria-labelledby="historic-heading">
+                <h2 id="historic-heading">Historic Attractions</h2>
+                <h3>Old City Cemetery</h3>
+                <p>
+                    Old City Cemetery was established in 1806 and includes gardens, museums, and historic graves.
+                </p>
+                <h3>Point of Honor</h3>
+                <p>
+                    Point of Honor is another historic location that offers visitors an opportunity to learn about Lynchburg's past.
+                </p>
+            </section>
+
+            <!-- Places List -->
+            <section class="content-section" id="explore" aria-labelledby="explore-heading">
+                <h2 id="explore-heading">Places to Explore</h2>
+                <ol class="attractions-grid numbered">
+                    <li class="attraction-card">Visit Thomas Jefferson's Poplar Forest.</li>
+                    <li class="attraction-card">Explore the Old City Cemetery.</li>
+                    <li class="attraction-card">Walk along the Blackwater Creek Trail.</li>
+                    <li class="attraction-card">Visit the Lynchburg Museum.</li>
+                    <li class="attraction-card">Explore Amazement Square.</li>
+                </ol>
+            </section>
+
+            <section class="content-section" id="outdoor" aria-labelledby="outdoor-heading">
+                <h2 id="outdoor-heading">Outdoor Attractions</h2>
+                <p>
+                    Percival's Island Natural Area is another outdoor destination where visitors can enjoy a scenic trail experience near the James River. Lynchburg's riverfront and trail system provide opportunities for walking and biking.
+                </p>
+            </section>
+
+            <section class="content-section highlight" id="plan-visit" aria-labelledby="plan-visit-heading">
+                <h2 id="plan-visit-heading">Plan Your Visit</h2>
+                <p>
+                    Lynchburg offers a mixture of historic sites, museums, outdoor recreation, and family-friendly attractions, making it an interesting place to explore.
+                </p>
+            </section>
+
+            <!-- Link of the home page -->
+            <p class="cta">
+                <a href="index.html" class="btn"><span aria-hidden="true">&larr;</span> Back to the Lynchburg attractions home page</a>
             </p>
-        </section>
-
-        <!-- Places List -->
-        <section class="content-section" id="explore">
-            <h2>Places to Explore</h2>
-            <ol class="attractions-grid numbered">
-                <li class="attraction-card">Visit Thomas Jefferson's Poplar Forest.</li>
-                <li class="attraction-card">Explore the Old City Cemetery.</li>
-                <li class="attraction-card">Walk along the Blackwater Creek Trail.</li>
-                <li class="attraction-card">Visit the Lynchburg Museum.</li>
-                <li class="attraction-card">Explore Amazement Square.</li>
-            </ol>
-        </section>
-
-        <section class="content-section" id="outdoor">
-            <h2>Outdoor Attractions</h2>
-            <p>
-                Percival's Island Natural Area is another outdoor destination where visitors can enjoy a scenic trail experience near the James River. Lynchburg's riverfront and trail system provide opportunities for walking and biking.
-            </p>
-        </section>
-
-        <section class="content-section highlight" id="plan-visit">
-            <h3>Plan Your Visit</h3>
-            <p>
-                Lynchburg offers a mixture of historic sites, museums, outdoor recreation, and family-friendly attractions, making it an interesting place to explore.
-            </p>
-        </section>
-
-        <!-- Link of the home page -->
-        <p class="cta">
-            <a href="index.html" class="btn">&larr; Back to Home</a>
-        </p>
+        </div>
     </main>
 
     <footer class="site-footer">
