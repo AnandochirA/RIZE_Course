@@ -10,81 +10,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS (loaded first so styles.css can override it) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Custom stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Lets keyboard and screen reader users jump past the navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Site navigation -->
-    <header class="site-header">
-        <nav class="site-nav" aria-label="Main">
+    <header class="site-header sticky-top">
+        <nav class="container d-flex flex-wrap align-items-center justify-content-center justify-content-sm-between gap-2 py-3" aria-label="Main">
             <a href="index.html" class="logo" aria-label="Lynchburg.VA home">Lynchburg<span>.VA</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="page2.html" class="nav-link active" aria-current="page">More Attractions</a></li>
+            <ul class="nav gap-4 mb-0">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="page2.html" class="nav-link active" aria-current="page">More Attractions</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main-content">
+    <main id="main-content" class="flex-grow-1">
         <!-- Main header -->
-        <section class="hero" id="hero">
+        <section class="hero text-center py-5 px-3" id="hero">
+            <span class="badge rounded-pill badge-gold mb-3">History &middot; Culture &middot; Nature</span>
             <h1>More Places to Explore in Lynchburg</h1>
             <!-- Giving context about main topic -->
-            <p class="hero-text">Lynchburg has many attractions for people interested in history, culture, nature, old school lifestyle, and family activities.</p>
+            <p class="hero-text lead mx-auto mb-0">Lynchburg has many attractions for people interested in history, culture, nature, old school lifestyle, and family activities.</p>
         </section>
 
-        <div class="container">
-            <!-- Historic sites, each with its own sub-heading -->
-            <section class="content-section" id="historic" aria-labelledby="historic-heading">
+        <div class="container content-wrap py-5">
+            <!-- Historic sites, each with its own sub-heading, in a two-column grid -->
+            <section class="content-section p-4 p-md-5 mb-4" id="historic" aria-labelledby="historic-heading">
                 <h2 id="historic-heading">Historic Attractions</h2>
-                <h3>Old City Cemetery</h3>
-                <p>
-                    Old City Cemetery was established in 1806 and includes gardens, museums, and historic graves.
-                </p>
-                <h3>Point of Honor</h3>
-                <p>
-                    Point of Honor is another historic location that offers visitors an opportunity to learn about Lynchburg's past.
-                </p>
+                <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                        <h3>Old City Cemetery</h3>
+                        <p class="mb-0">
+                            Old City Cemetery was established in 1806 and includes gardens, museums, and historic graves.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Point of Honor</h3>
+                        <p class="mb-0">
+                            Point of Honor is another historic location that offers visitors an opportunity to learn about Lynchburg's past.
+                        </p>
+                    </div>
+                </div>
             </section>
 
             <!-- Places List -->
-            <section class="content-section" id="explore" aria-labelledby="explore-heading">
+            <section class="content-section p-4 p-md-5 mb-4" id="explore" aria-labelledby="explore-heading">
                 <h2 id="explore-heading">Places to Explore</h2>
-                <ol class="attractions-grid numbered">
-                    <li class="attraction-card">Visit Thomas Jefferson's Poplar Forest.</li>
-                    <li class="attraction-card">Explore the Old City Cemetery.</li>
-                    <li class="attraction-card">Walk along the Blackwater Creek Trail.</li>
-                    <li class="attraction-card">Visit the Lynchburg Museum.</li>
-                    <li class="attraction-card">Explore Amazement Square.</li>
+                <ol class="row row-cols-1 row-cols-md-2 g-3 list-unstyled mt-2 mb-0 numbered">
+                    <li class="col"><div class="attraction-card h-100">Visit Thomas Jefferson's Poplar Forest.</div></li>
+                    <li class="col"><div class="attraction-card h-100">Explore the Old City Cemetery.</div></li>
+                    <li class="col"><div class="attraction-card h-100">Walk along the Blackwater Creek Trail.</div></li>
+                    <li class="col"><div class="attraction-card h-100">Visit the Lynchburg Museum.</div></li>
+                    <li class="col"><div class="attraction-card h-100">Explore Amazement Square.</div></li>
                 </ol>
             </section>
 
-            <section class="content-section" id="outdoor" aria-labelledby="outdoor-heading">
-                <h2 id="outdoor-heading">Outdoor Attractions</h2>
-                <p>
-                    Percival's Island Natural Area is another outdoor destination where visitors can enjoy a scenic trail experience near the James River. Lynchburg's riverfront and trail system provide opportunities for walking and biking.
-                </p>
-            </section>
-
-            <section class="content-section highlight" id="plan-visit" aria-labelledby="plan-visit-heading">
-                <h2 id="plan-visit-heading">Plan Your Visit</h2>
-                <p>
-                    Lynchburg offers a mixture of historic sites, museums, outdoor recreation, and family-friendly attractions, making it an interesting place to explore.
-                </p>
-            </section>
+            <!-- Outdoor and planning sections sit side by side on large screens -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-6">
+                    <section class="content-section p-4 p-md-5 h-100" id="outdoor" aria-labelledby="outdoor-heading">
+                        <h2 id="outdoor-heading">Outdoor Attractions</h2>
+                        <p class="mb-0">
+                            Percival's Island Natural Area is another outdoor destination where visitors can enjoy a scenic trail experience near the James River. Lynchburg's riverfront and trail system provide opportunities for walking and biking.
+                        </p>
+                    </section>
+                </div>
+                <div class="col-lg-6">
+                    <section class="content-section highlight p-4 p-md-5 h-100" id="plan-visit" aria-labelledby="plan-visit-heading">
+                        <h2 id="plan-visit-heading">Plan Your Visit</h2>
+                        <p class="mb-0">
+                            Lynchburg offers a mixture of historic sites, museums, outdoor recreation, and family-friendly attractions, making it an interesting place to explore.
+                        </p>
+                    </section>
+                </div>
+            </div>
 
             <!-- Link of the home page -->
-            <p class="cta">
-                <a href="index.html" class="btn"><span aria-hidden="true">&larr;</span> Back to the Lynchburg attractions home page</a>
+            <p class="text-center mt-4 mb-2 mx-auto">
+                <a href="index.html" class="btn btn-lg rounded-pill btn-brick px-4"><span aria-hidden="true">&larr;</span> Back to the Lynchburg attractions home page</a>
             </p>
         </div>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2026 Lynchburg Travel Guide</p>
+    <footer class="site-footer text-center py-4 small">
+        <p class="mb-0 mx-auto">&copy; 2026 Lynchburg Travel Guide</p>
     </footer>
 </body>
 </html>
